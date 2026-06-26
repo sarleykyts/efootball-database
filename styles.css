@@ -1,0 +1,108 @@
+:root {
+    --bg-color: #0a0e17;
+    --text-color: #ffffff;
+    --glass-bg: rgba(16, 24, 43, 0.6);
+    --glass-border: rgba(0, 255, 255, 0.2);
+    --neon-cyan: #00f3ff;
+    --neon-pink: #ff00ea;
+    --epic-gold: linear-gradient(135deg, #ffd700, #ff8c00, #ffd700);
+    --showtime-pink: linear-gradient(135deg, #ff00ea, #6a00ff, #ff00ea);
+    --bigtime-green: linear-gradient(135deg, #00ff88, #0088ff, #00ff88);
+}
+
+[data-theme="light"] {
+    --bg-color: #f0f4f8;
+    --text-color: #1a1a1a;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --neon-cyan: #0066ff;
+    --neon-pink: #d600c4;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body { background: var(--bg-color); color: var(--text-color); overflow-x: hidden; transition: background 0.5s ease; }
+
+/* Backgrounds & Parallax */
+#stadium-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: url('https://images.unsplash.com/photo-1518605368461-1e1e38ce7058?auto=format&fit=crop&q=80') center/cover;
+    opacity: 0.15; z-index: -2;
+}
+#particles-js { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; }
+
+/* Loader */
+#loader { position: fixed; inset: 0; background: #000; z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.5s ease; }
+.efoot-logo { font-size: 3rem; font-weight: 900; text-align: center; background: linear-gradient(to right, var(--neon-cyan), var(--neon-pink)); -webkit-background-clip: text; color: transparent; animation: pulse 1.5s infinite; }
+.loading-bar { width: 200px; height: 4px; background: #333; margin-top: 20px; border-radius: 2px; overflow: hidden; }
+.loading-bar .fill { width: 0%; height: 100%; background: var(--neon-cyan); animation: loadBar 2s forwards; }
+
+@keyframes loadBar { 100% { width: 100%; } }
+@keyframes pulse { 50% { opacity: 0.5; } }
+
+/* Navigation / Glassmorphism */
+.glass-nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center; padding: 15px 30px;
+    background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border); box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+.logo { font-size: 1.5rem; font-weight: bold; text-shadow: 0 0 10px var(--neon-cyan); }
+.controls { display: flex; gap: 15px; flex-wrap: wrap; align-items: center; }
+.search-box { display: flex; align-items: center; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 5px 15px; border: 1px solid var(--glass-border); }
+.search-box input { background: transparent; border: none; color: var(--text-color); outline: none; margin-left: 10px; }
+select, .btn { background: rgba(0,0,0,0.2); color: var(--text-color); border: 1px solid var(--glass-border); padding: 8px 15px; border-radius: 8px; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s; }
+.btn:hover { box-shadow: 0 0 10px var(--neon-cyan); border-color: var(--neon-cyan); }
+
+/* Card Grid */
+.cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; padding: 40px; }
+
+/* Player Cards */
+.card {
+    position: relative; background: var(--glass-bg); border-radius: 15px; padding: 15px;
+    text-align: center; cursor: pointer; backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    overflow: hidden;
+}
+.card:hover { transform: translateY(-10px) scale(1.02); z-index: 10; box-shadow: 0 15px 30px rgba(0,0,0,0.5); }
+.card img { width: 100%; height: 200px; object-fit: contain; filter: drop-shadow(0 10px 5px rgba(0,0,0,0.5)); }
+.card-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; }
+.card-name { margin-top: 10px; font-size: 1.1rem; font-weight: 600; text-transform: uppercase; }
+.fav-btn { position: absolute; top: 10px; right: 10px; color: #fff; cursor: pointer; z-index: 5; text-shadow: 0 0 5px #000; }
+.fav-btn.active { color: #ff0055; text-shadow: 0 0 10px #ff0055; }
+.stars { color: gold; font-size: 0.8rem; margin-top: 5px; }
+
+/* Rarity Holographic Animations */
+.card::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: 15px; opacity: 0; transition: opacity 0.3s; }
+.card:hover::before { opacity: 1; }
+.epic { border: 2px solid transparent; background-clip: padding-box; position: relative; }
+.epic::after { content: ''; position: absolute; inset: -2px; z-index: -2; background: var(--epic-gold); background-size: 200% 200%; animation: holo 3s ease infinite; border-radius: 15px; }
+.showtime::after { content: ''; position: absolute; inset: -2px; z-index: -2; background: var(--showtime-pink); background-size: 200% 200%; animation: holo 3s ease infinite; border-radius: 15px; }
+.big-time::after { content: ''; position: absolute; inset: -2px; z-index: -2; background: var(--bigtime-green); background-size: 200% 200%; animation: holo 3s ease infinite; border-radius: 15px; }
+
+@keyframes holo { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+
+/* Modal & Stats */
+.modal { position: fixed; inset: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); }
+.hidden { display: none !important; }
+.modal-content { background: var(--bg-color); border: 1px solid var(--neon-cyan); padding: 30px; border-radius: 15px; width: 90%; max-width: 600px; position: relative; box-shadow: 0 0 30px rgba(0, 243, 255, 0.2); }
+.close { position: absolute; top: 15px; right: 20px; font-size: 24px; cursor: pointer; color: var(--text-color); }
+.stat-row { margin: 10px 0; display: flex; align-items: center; }
+.stat-label { width: 100px; font-size: 0.9rem; font-weight: bold; }
+.stat-bar-bg { flex: 1; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; margin: 0 10px; }
+.stat-bar-fill { height: 100%; width: 0; background: var(--neon-cyan); transition: width 1s cubic-bezier(0.4, 0, 0.2, 1); }
+.stat-val { width: 30px; text-align: right; font-weight: bold; }
+
+/* Compare Mode */
+#compare-banner { background: var(--neon-cyan); color: #000; text-align: center; padding: 10px; font-weight: bold; position: sticky; top: 70px; z-index: 99; }
+.compare-container { display: flex; justify-content: space-between; gap: 20px; }
+.compare-side { flex: 1; }
+
+/* Mobile First Adjustments */
+@media (max-width: 768px) {
+    .glass-nav { flex-direction: column; gap: 15px; }
+    .controls { justify-content: center; width: 100%; }
+    .search-box { width: 100%; }
+    .cards-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); padding: 20px; }
+    .compare-container { flex-direction: column; }
+          }
