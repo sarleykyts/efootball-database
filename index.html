@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eFoot Cards 2026</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="loader">
+        <div class="efoot-logo">eFootball<br><span>2026</span></div>
+        <div class="loading-bar"><div class="fill"></div></div>
+    </div>
+
+    <div id="stadium-bg"></div>
+    <div id="particles-js"></div>
+
+    <audio id="bgMusic" loop>
+        <source src="assets/bgm.mp3" type="audio/mpeg">
+    </audio>
+
+    <nav class="glass-nav">
+        <div class="logo">🎮 eFootDB</div>
+        <div class="controls">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search players...">
+            </div>
+            <select id="posFilter">
+                <option value="all">All Positions</option>
+                <option value="FW">Forwards</option>
+                <option value="MF">Midfielders</option>
+                <option value="DF">Defenders</option>
+                <option value="GK">Goalkeepers</option>
+            </select>
+            <select id="sortFilter">
+                <option value="ovr-desc">Highest OVR</option>
+                <option value="ovr-asc">Lowest OVR</option>
+                <option value="name">Name (A-Z)</option>
+            </select>
+            <button id="compareBtn" class="btn"><i class="fas fa-balance-scale"></i> Compare</button>
+            <button id="themeToggle" class="btn"><i class="fas fa-moon"></i></button>
+            <button id="musicToggle" class="btn"><i class="fas fa-music"></i></button>
+        </div>
+    </nav>
+
+    <main class="parallax-container">
+        <div id="compare-banner" class="hidden">Select 2 players to compare</div>
+        <div class="cards-grid" id="cardsGrid">
+            </div>
+    </main>
+
+    <div id="playerModal" class="modal glassmorphism hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalBody"></div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
