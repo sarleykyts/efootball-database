@@ -1,0 +1,21 @@
+{
+  "name": "eFoot Cards DB 2026",
+  "short_name": "eFootDB",
+  "description": "Database for eFootball 2026 cards",
+  "start_url": "/efootball-database/index.html",
+  "display": "standalone",
+  "background_color": "#0a0e17",
+  "theme_color": "#00f3ff",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
